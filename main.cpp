@@ -1,9 +1,4 @@
-#include <iostream>
-#include <string>
 #include "FBullsandCows.hpp"
-
-using FText = std::string;
-using int32 = int;
 
 void PrintIntro();
 FText getValidGuess();
@@ -44,21 +39,22 @@ void PlayGame()
     bool gamestat;
     while(!BCGAME.GameWon(Guess) && CurrentTry <= MaxTries)
     {
-    Guess = getValidGuess();
-    FBullsCowsCount FBullsCowsCount = BCGAME.SubmitGuess(Guess);
-    std::cout << "Bulls " << FBullsCowsCount.Bulls;
-    std::cout << ". Cows " << FBullsCowsCount.Cows << "\n\n"; 
+        Guess = getValidGuess();
+        FBullsCowsCount FBullsCowsCount = BCGAME.SubmitGuess(Guess);
+        std::cout << "Bulls " << FBullsCowsCount.Bulls;
+        std::cout << ". Cows " << FBullsCowsCount.Cows << "\n\n"; 
 
-    if(!BCGAME.GameWon(Guess) && CurrentTry > MaxTries)
-    { 
-        gamestat = false; 
-    }else if (BCGAME.GameWon(Guess) && CurrentTry <= MaxTries) 
-    { 
-        gamestat = true; 
-    }else if (BCGAME.GameWon(Guess) && CurrentTry > MaxTries) 
-    { 
-        gamestat = false; 
-    }
+        if(!BCGAME.GameWon(Guess) && CurrentTry > MaxTries)
+        { 
+            gamestat = false; 
+        }else if (BCGAME.GameWon(Guess) && CurrentTry <= MaxTries) 
+        { 
+            gamestat = true; 
+        }else if (BCGAME.GameWon(Guess) && CurrentTry > MaxTries) 
+        { 
+            gamestat = false; 
+        }
+        CurrentTry = BCGAME.GetCurrentTry();
     }
     GameWinLoseScreen(gamestat);
     return;
@@ -101,7 +97,7 @@ void PrintIntro()
 {
     std::cout << "welcome to bulls and cows!" << std::endl;
     std::cout << "can you guess the " << BCGAME.GetHiddenWordLength();
-    std::cout << " word isogram im thinking of?" << std::endl;
+    std::cout << " letters word isogram im thinking of?" << std::endl;
     return;
 }
 

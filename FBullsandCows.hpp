@@ -4,8 +4,10 @@
 #include <iostream>
 #include <map>
 #include <time.h>
-#define TMap std::map
 
+
+#define TMap std::map
+using FText = std::string;
 using FString = std::string;
 using int32 = int;
 
