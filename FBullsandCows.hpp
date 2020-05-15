@@ -4,9 +4,11 @@
 #include <iostream>
 #include <map>
 #include <time.h>
-#define TMap std::map
 
+//this is just for coding like in Unreal Engine
+#define TMap std::map
 using FString = std::string;
+using FText = std::string;
 using int32 = int;
 
 struct FBullsCowsCount
@@ -28,12 +30,14 @@ enum class EWords
 class FBullsandCows
 {
 public:
-    FBullsandCows();
+    //FBullsandCows();
     int32 GetMaxTries() const;
     int32 GetCurrentTry() const;
     int32 GetHiddenWordLength() const;
     bool GameWon(FString Guess) const;
     void Reset();
+    void AddHiddenWord(FText Word);
+    void SetHiddenWords();
     EWords GuessValidity(FString Guess) const;
     FBullsCowsCount SubmitGuess(FString Guess);
 
@@ -42,11 +46,9 @@ private:
     int32 MaxTries;
     FString HiddenWord;
     TMap<int32, FString> HiddenWords;
-    void SetHiddenWords();
     FString SelectHiddenWord();
     bool IsIsogram(FString guess) const;
     bool IsLowercase(FString guess) const;
-
 };
 
 #endif

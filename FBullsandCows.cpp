@@ -1,10 +1,11 @@
 #include "FBullsandCows.hpp"
 
+/*
 FBullsandCows::FBullsandCows()
 {
-    SetHiddenWords();
     Reset();
 }
+*/
 
 int32 FBullsandCows::GetMaxTries() const{ return MaxTries; }
 int32 FBullsandCows::GetCurrentTry() const{ return CurrentTry; }
@@ -15,8 +16,7 @@ void FBullsandCows::Reset()
 {
     constexpr int32 MAX_TRIES = 8;
     MaxTries = MAX_TRIES;
-    const FString HIDDEN_WORD = SelectHiddenWord();
-    HiddenWord = HIDDEN_WORD;
+    HiddenWord = SelectHiddenWord();
     CurrentTry = 1;
     return;
 }
@@ -59,7 +59,9 @@ FBullsCowsCount FBullsandCows::SubmitGuess(FString Guess)
 
                 if(HDChar == GSChar){
                     FBullsCowsCount.Bulls++;
-                }else{
+                }
+                else
+                {
                     FBullsCowsCount.Cows++;
                 }
              } 
@@ -77,9 +79,11 @@ bool FBullsandCows::IsIsogram(FString Guess) const
     for(auto letter : Guess)
     {
         letter = tolower(letter);
-        if(LetterSeen[letter]){
+        if(LetterSeen[letter])
+        {
             return false;
-        }else
+        }
+        else
         {
             LetterSeen[letter] = true;
         }
@@ -92,7 +96,8 @@ bool FBullsandCows::IsLowercase(FString Guess) const
 {
     for(auto letter : Guess)
     {
-        if(letter != tolower(letter)){
+        if(letter != tolower(letter))
+        {
             return false;
         }
     }
@@ -101,16 +106,31 @@ bool FBullsandCows::IsLowercase(FString Guess) const
 
 void FBullsandCows::SetHiddenWords()
 {
-    HiddenWords[0] = "camp";
-    HiddenWords[1] = "world";
-    HiddenWords[2] = "sword";
-    HiddenWords[3] = "champ";
-    HiddenWords[4] = "space";
-    HiddenWords[5] = "cowboy";
+    if (HiddenWords.size() > 0)
+    {
+        return;
+    }
+    else
+    {
+        HiddenWords[0] = "camp";
+        HiddenWords[1] = "world";
+        HiddenWords[2] = "sword";
+        HiddenWords[3] = "champ";
+        HiddenWords[4] = "space";
+        HiddenWords[5] = "cowboy";
+    }
 }
 
 FString FBullsandCows::SelectHiddenWord()
 {
+    SetHiddenWords();
     srand (time(NULL));
-    return HiddenWords[rand() % 5];
+    return HiddenWords[rand() % HiddenWords.size() - 1];
+}
+
+void FBullsandCows::AddHiddenWord(FText Word)
+{
+    FString newWord = Word;
+    int32 newN = HiddenWords.size();
+    HiddenWords[newN] = newWord;
 }
